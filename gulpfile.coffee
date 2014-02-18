@@ -10,11 +10,23 @@ open = require 'open'
 http = require 'http'
 path = require 'path'
 ecstatic = require 'ecstatic'
+notify = require 'gulp-notify'
+concat = require 'gulp-concat'
+clean = require 'gulp-clean'
 
 paths = 
   public: ['public/**']
   styles: ['app/css/**/*.scss']
-  scripts: ['app/js/**/*.coffee']
+  scripts: 
+    vendor: [
+      "public/components/ionic/release/js/ionic.js"
+      "public/components/angular/angular.js"
+      "public/components/angular-animate/angular-animate.js"
+      "public/components/angular-sanitize/angular-sanitize.js"
+      "public/components/angular-ui-router/release/angular-ui-router.js"
+      "public/components/ionic/release/js/ionic-angular.js"
+    ]
+    app: ['app/js/**/*.coffee']
   templates: ['app/**/*.jade']
 
 destinations = 
@@ -29,36 +41,50 @@ options = {
   riddlePort: 4400
 }
 
+notifyGulpError = (pipe) ->
+  pipe.on('error', notify.onError((error) -> 
+    "Error: #{error.message}"
+  ))
+
+gulp.task 'clean', ->
+  gulp.src('www', read: false)
+    .pipe(clean())
 
 gulp.task 'copy_public', ->
   gulp.src(paths.public)
-    .pipe(changed(destinations.public))
+    # .pipe(changed(destinations.public))
     .pipe(gulp.dest(destinations.public))
 
 
 gulp.task 'styles', ->
-  gulp.src(paths.styles)
-    .pipe(changed(destinations.styles, extension: '.css'))
+  notifyGulpError gulp.src(paths.styles)
+    # .pipe(changed(destinations.styles, extension: '.css'))
     .pipe(sass({
-      errLogToConsole: true, 
+      errLogToConsole: true
       sourceComments: 'map'
     }))
     .pipe(gulp.dest(destinations.styles))
 
 
 gulp.task 'scripts', ->
-  gulp.src(paths.scripts)
-    .pipe(changed(destinations.scripts))
-    # copy .coffee to www/ also, because .map files links to them them with relative path
-    .pipe(gulp.dest(destinations.scripts)) 
+  notifyGulpError gulp.src(paths.scripts.vendor)
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest(destinations.scripts))
+
+  notifyGulpError gulp.src(paths.scripts.app)
+    # .pipe(changed(destinations.scripts))
+    # copy .coffee to www/ also, because sourcemap links to sources with relative path
+    # .pipe(gulp.dest(destinations.scripts)) 
     .pipe(coffee({
-      sourceMap: true
+      # sourcemaps arent ready for gulp-concat yet :/ lets wait with that
+      sourceMap: false
     }))
+    .pipe(concat('app.js'))
     .pipe(gulp.dest(destinations.scripts))
 
 
 gulp.task 'templates', ->
-  gulp.src(paths.templates)
+  notifyGulpError gulp.src(paths.templates)
     .pipe(changed(destinations.templates, extension: '.html'))
     .pipe(jade({
       locals: {}
@@ -69,7 +95,8 @@ gulp.task 'templates', ->
 
 gulp.task 'watch', ->
   gulp.watch(paths.public, ['copy_public'])
-  gulp.watch(paths.scripts, ['scripts'])
+  gulp.watch(paths.scripts.app, ['scripts'])
+  gulp.watch(paths.scripts.vendor, ['scripts'])
   gulp.watch(paths.styles, ['styles'])
   gulp.watch(paths.templates, ['templates'])
 
@@ -97,6 +124,7 @@ gulp.task 'server', ->
 
 
 gulp.task 'default', [
+  # 'clean'
   'copy_public'
   'styles'
   'scripts'

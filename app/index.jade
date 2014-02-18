@@ -5,40 +5,22 @@ html
     meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
     title Ionic Seed App
 
-    link(href='components/ionic/release/css/ionic.css', rel='stylesheet')
     link(href='css/app.css', rel='stylesheet')
 
-    // cordova script
     script(src='cordova.js')
-
     script.
       _IS_RIPPLE_EMULATOR = window.tinyHippos != undefined;
-
       function deviceready() {
           // Make ripple think that a back button handler has already been attached
           if(_IS_RIPPLE_EMULATOR) cordova.addDocumentEventHandler('backbutton'); 
-
           document.addEventListener("backbutton", function(){
               alert("Pressed back");
           });
-
       }
-      document.addEventListener("deviceready", deviceready, true);   
+      document.addEventListener("deviceready", deviceready, true);
 
-    script(src='components/ionic/release/js/ionic.bundle.js')
-    // <script src="components/ionic/release/js/ionic.js"></script>
-    // <script src="components/ionic/release/js/angular/angular.js"></script>
-    // <script src="components/ionic/release/js/angular/angular-animate.js"></script>
-    // <script src="components/ionic/release/js/angular/angular-sanitize.js"></script>
-    // <script src="components/ionic/release/js/angular-ui/angular-ui-router.js"></script>
-    // <script src="components/ionic/release/js/ionic-angular.js"></script>
-
-    // your app's script
-    script(src='js/app.js')
-    script(src='js/services.js')
-    script(src='js/controllers.js')
-      
-    // 'starter' is the name of this angular module (js/app.js)
+    script(src="js/vendor.js")
+    script(src="js/app.js")
       
   body(ng-app='starter', animation='slide-left-right-ios7')
     //

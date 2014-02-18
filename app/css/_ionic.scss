@@ -1,0 +1,41 @@
+// Ionicons
+@import "../../public/components/ionic/scss/ionicons/ionicons.scss";
+
+// Variables
+@import "../../public/components/ionic/scss/mixins";
+@import "../../public/components/ionic/scss/variables";
+
+// Base
+@import "../../public/components/ionic/scss/reset";
+@import "../../public/components/ionic/scss/scaffolding";
+@import "../../public/components/ionic/scss/type";
+
+// Components
+@import "../../public/components/ionic/scss/action-sheet";
+@import "../../public/components/ionic/scss/bar";
+@import "../../public/components/ionic/scss/tabs";
+@import "../../public/components/ionic/scss/menu";
+@import "../../public/components/ionic/scss/modal";
+@import "../../public/components/ionic/scss/popup";
+@import "../../public/components/ionic/scss/items";
+@import "../../public/components/ionic/scss/list";
+@import "../../public/components/ionic/scss/badge";
+@import "../../public/components/ionic/scss/slide-box";
+@import "../../public/components/ionic/scss/split-pane";
+
+// Forms
+@import "../../public/components/ionic/scss/form";
+@import "../../public/components/ionic/scss/checkbox";
+@import "../../public/components/ionic/scss/toggle";
+@import "../../public/components/ionic/scss/radio";
+@import "../../public/components/ionic/scss/range";
+
+// Buttons
+@import "../../public/components/ionic/scss/button";
+@import "../../public/components/ionic/scss/button-bar";
+
+// Util
+@import "../../public/components/ionic/scss/animations";
+@import "../../public/components/ionic/scss/grid";
+@import "../../public/components/ionic/scss/util";
+@import "../../public/components/ionic/scss/platform";
