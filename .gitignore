@@ -1,3 +1,6 @@
 *.keystore
 *.sw*
 platforms/^.*
+node_modules
+public/components
+www

@@ -1,0 +1,16 @@
+{
+  "name": "ionic-angular-cordova-gulp-seed",
+  "version": "0.1.0",
+  "description": "FestBlast Application based on Ionic and Angular, for Cordova (iOS, Android).",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "www/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic": "~0.9.24"
+  }
+}
