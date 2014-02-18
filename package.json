@@ -19,6 +19,7 @@
     "ecstatic": "~0.4.13",
     "gulp-notify": "~0.6.2",
     "gulp-sass": "~0.7.0",
-    "gulp-clean": "~0.2.4"
+    "gulp-clean": "~0.2.4",
+    "run-sequence": "~0.3.6"
   }
 }

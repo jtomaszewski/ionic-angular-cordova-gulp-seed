@@ -13,6 +13,7 @@ ecstatic = require 'ecstatic'
 notify = require 'gulp-notify'
 concat = require 'gulp-concat'
 clean = require 'gulp-clean'
+runSequence = require 'run-sequence'
 
 paths = 
   public: ['public/**']
@@ -122,13 +123,15 @@ gulp.task 'server', ->
     open(url)
     gutil.log gutil.colors.blue "Opening #{url} in the browser..."
 
+gulp.task 'build', (cb) ->
+  runSequence 'clean',
+    [
+      'copy_public'
+      'styles'
+      'scripts'
+      'templates'
+    ], cb
 
-gulp.task 'default', [
-  # 'clean'
-  'copy_public'
-  'styles'
-  'scripts'
-  'templates'
-  'watch'
-  'server'
-]
+gulp.task 'default', (cb) ->
+  runSequence 'build', 
+    ['watch', 'server'], cb
