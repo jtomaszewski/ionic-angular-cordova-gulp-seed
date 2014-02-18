@@ -88,7 +88,7 @@ gulp.task 'emulator', ->
 
 
 gulp.task 'server', ->
-  http.createServer(ecstatic(root: __dirname)).listen(options.httpPort)
+  http.createServer(ecstatic(root: "www")).listen(options.httpPort)
   gutil.log gutil.colors.blue "HTTP server listening on #{options.httpPort}"
   if options.open
     url = "http://localhost:#{options.httpPort}/"
