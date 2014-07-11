@@ -1,5 +1,6 @@
-ionic-angular-cordova-seed fork with sass, coffee, jade, glup, livereload, ripple-emulator
-==========================
+#### PROJECT DEPRECATED - see [jtomaszewski/ionic-cordova-gulp-seed](https://github.com/jtomaszewski/ionic-cordova-gulp-seed) for new one!
+
+## ionic-angular-cordova-seed fork with sass, coffee, jade, glup, livereload, ripple-emulator
 
 The perfect starting point for an Ionic project.
 
